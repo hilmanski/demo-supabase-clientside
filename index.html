@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Supabase</title>
+    
+</head>
+<body>
+
+<h1>From Supabase</h1>
+<div id="holder"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+//Change with yuor Key and Url
+const SUPABASE_URL = 'https://gpdywhtwqnlapruuxzxz.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyODU1MTczNSwiZXhwIjoxOTQ0MTI3NzM1fQ.L7CPwacaytFdW1iXs4tjPE3lgoW4IJQ0rziOlxtRuG4'
+
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+//posts is table name
+async function loadData() {
+    const { data, error } = await _supabase
+            .from('posts')
+            .select('*')
+
+    if(!error) {
+        //loop display data here
+        const parent = document.getElementById('holder')
+
+        let contents = ''
+        data.forEach(function(item){
+            contents += `<div> ${item.title} - ${item.tag}</div>` 
+        })
+
+        parent.insertAdjacentHTML('beforeend', contents)
+    }
+}
+loadData()
+
+//Uncomment to use insert, it runs on every reload
+// async function insertData() {
+//     const { data, error } = await _supabase
+//         .from('posts')
+//           .insert([
+//             { title: 'The Shire', body: 'im, the body ladies and gentleman', tag: 'fun' }
+//         ])
+
+//     console.log(data)
+//     console.log(error)
+// }
+// insertData()
+
+</script>
+
+</body>
+</html>
