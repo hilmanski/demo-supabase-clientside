@@ -12,8 +12,13 @@
 <h1>From Supabase</h1>
 <div id="holder"></div>
 
+//use example here
+https://github.com/supabase/supabase/blob/master/examples/javascript-auth/index.js
+read directly from URL
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script>
+
 //Change with yuor Key and Url
 const SUPABASE_URL = 'https://gpdywhtwqnlapruuxzxz.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyODU1MTczNSwiZXhwIjoxOTQ0MTI3NzM1fQ.L7CPwacaytFdW1iXs4tjPE3lgoW4IJQ0rziOlxtRuG4'
@@ -40,18 +45,12 @@ async function loadData() {
 }
 loadData()
 
-//Uncomment to use insert, it runs on every reload
-// async function insertData() {
-//     const { data, error } = await _supabase
-//         .from('posts')
-//           .insert([
-//             { title: 'The Shire', body: 'im, the body ladies and gentleman', tag: 'fun' }
-//         ])
 
-//     console.log(data)
-//     console.log(error)
-// }
-// insertData()
+const user = _supabase.auth.user()
+
+if(user) {
+    alert('you are logged In!')
+}
 
 </script>
 
