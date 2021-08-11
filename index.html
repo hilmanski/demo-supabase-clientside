@@ -49,7 +49,18 @@ loadData()
 const user = _supabase.auth.user()
 
 if(user) {
-    alert('you are logged In!')
+    //you're logged in
+    async function insertData() {
+        const { data, error } = await _supabase
+            .from('posts')
+            .insert([
+                { title: 'The Shire', body: 'im, the body ladies and gentleman', tag: 'fun' }
+            ])
+
+        console.log(data)
+        console.log(error)
+    }
+    insertData()
 }
 
 </script>
